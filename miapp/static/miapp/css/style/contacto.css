@@ -1,0 +1,24 @@
+form {
+    background: #fbd5e5;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.logo{
+    width: 75px; /* Ajusta el tamaño del logo */
+    height: auto; /* Mantiene la proporción del logo */
+    display: block;
+    margin: 0; /* Elimina el margen automático */
+    padding: 0; /* Elimina el padding */
+    margin-right: 12px; /* Espacio a la derecha del logo */
+    float: left; /* Opcional: fuerza el logo a la izquierda */
+}
+#botonnav {
+  background-color: #f7e2eb; /* Color de fondo del botón */
+  color: hotpink; /* Color del texto del botón */
+  border: hotpink; /* Elimina el borde por defecto */
+  padding: 10px 20px; /* Espacio interno del botón */
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; /* Fuente del botón */
+  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+}

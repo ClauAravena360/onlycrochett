@@ -1,0 +1,58 @@
+{% extends "miapp/base.html" %}
+{% block content %}
+{% if carrito_error %}
+<div class="alert alert-danger text-center" role="alert">
+    {{ carrito_error }}
+</div>
+{% endif %}
+<div class="container my-5">
+    <h1 class="mb-4 text-center">Accesorios</h1>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for data in accesorios_data %}
+        <div class="col">
+            <div class="card h-100 accesorio-hover-card">
+                <div class="accesorio-img-container">
+                    <img src="{{ data.accesorio.imagen.url }}" class="card-img-top accesorio-img-base" alt="{{ data.accesorio.nombre }}">
+                    {% if data.accesorio.imagen_hover %}
+                    <img src="{{ data.accesorio.imagen_hover.url }}" class="card-img-top accesorio-img-hover" alt="{{ data.accesorio.nombre }} hover">
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ data.accesorio.nombre }}</h5>
+                    <p class="card-text">{{ data.accesorio.descripcion }}</p>
+                    <p class="fw-bold mb-2">Precio accesorio: ${{ data.accesorio.precio|floatformat:0 }}</p>
+                    <form method="post" action="{% url 'agregar_al_carrito' data.accesorio.id %}">
+                        {% csrf_token %}
+                        <div class="mb-2">
+                            <label for="numero_crochet_{{ data.accesorio.id }}">N° de crochet, precio y stock:</label>
+                            <select name="numero_crochet" id="numero_crochet_{{ data.accesorio.id }}" class="form-select" required>
+                                {% for opt in data.crochet_options %}
+                                    <option value="{{ opt.id }}" {% if opt.stock == 0 %}disabled{% endif %}>
+                                        {{ opt.numero }} - ${{ opt.precio|floatformat:0|default_if_none:"" }} {% if opt.stock == 0 %}(Sin stock){% else %}({{ opt.stock }} disponibles){% endif %}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        {# Deshabilitar si todas las opciones tienen stock 0 #}
+                        {% with hay_stock=False %}
+                        {% for opt in data.crochet_options %}
+                            {% if opt.stock > 0 %}
+                                {% with hay_stock=True %}{% endwith %}
+                            {% endif %}
+                        {% endfor %}
+                        <button type="submit" class="btn btn-primary w-100 mt-2"
+                            {% if data.crochet_options|length == 0 %}disabled{% endif %}>
+                            Agregar al carrito
+                        </button>
+                        {% endwith %}
+                    </form>
+                    <a href="{% url 'ver_carrito' %}" class="btn btn-outline-success w-100 mt-2">Ver carrito</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center">No hay accesorios cargados.</div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

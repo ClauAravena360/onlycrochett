@@ -1,0 +1,24 @@
+{% extends "miapp/base.html" %}
+{% block content %}
+<div class="container my-5">
+  <h2 class="mb-4 text-center">Mis patrones descargables</h2>
+  {% if patrones %}
+  <div class="row row-cols-1 row-cols-md-2 g-4">
+    {% for patron in patrones %}
+    <div class="col">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">{{ patron.nombre }}</h5>
+          <p class="card-text">{{ patron.descripcion }}</p>
+          <a href="{{ patron.archivo.url }}" class="btn btn-success" download>Descargar PDF</a>
+        </div>
+        <div class="card-footer text-muted small">Agregado: {{ patron.fecha|date:"d/m/Y H:i" }}</div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+    <div class="alert alert-info text-center">No tienes patrones descargables asignados.</div>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'miapp/base.html' %}
+{% block content %}
+<div class="container py-5 text-center">
+    <div class="alert alert-danger">
+        <h2>¡El pago fue rechazado o falló!</h2>
+        <p>Intenta nuevamente o utiliza otro método de pago.</p>
+    </div>
+    <a href="{% url 'ver_carrito' %}" class="btn btn-primary">Volver al carrito</a>
+</div>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'miapp/base.html' %}
+{% block content %}
+<div class="container py-4">
+    <h2 class="mb-4" style="font-family:'bobamilk',cursive; color:#d63384;">Patrones descargables</h2>
+    <div class="row">
+        {% for patron in patrones %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm" style="min-height:420px; display:flex; flex-direction:column;">
+                {% if patron.imagen %}
+                <img src="{{ patron.imagen.url }}" class="card-img-top" alt="{{ patron.nombre }}" style="object-fit:cover;max-height:320px;min-height:220px;">
+                {% endif %}
+                <div class="card-body d-flex flex-column flex-grow-1">
+                    <h5 class="card-title" style="color:#d63384;">{{ patron.nombre }}</h5>
+                    <p class="card-text">
+                        {% if patron.descripcion and patron.descripcion|length > 100 %}
+                            <span class="short-desc">{{ patron.descripcion|slice:":100" }}...</span>
+                            <span class="full-desc d-none">{{ patron.descripcion }}</span>
+                            <button type="button" class="btn btn-link p-0 ver-mas-btn">Ver más</button>
+                        {% else %}
+                            {{ patron.descripcion|default:"Sin descripción" }}
+                        {% endif %}
+                    </p>
+                    <p class="card-text fw-bold">Precio: ${{ patron.precio|floatformat:0 }}</p>
+                    <p class="card-text"><small class="text-muted">Publicado: {{ patron.fecha|date:"d/m/Y" }}</small></p>
+                    <form method="post" action="{% url 'agregar_patron_al_carrito' patron.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary mt-auto">Agregar al carrito</button>
+                    </form>
+                    {% if patron.archivo_pdf %}
+                        <a href="{{ patron.archivo_pdf.url }}" class="btn btn-outline-success mt-2" download>Ver PDF</a>
+                    {% else %}
+                        <span class="text-danger">PDF no disponible</span>
+                    {% endif %}
+                </div>
+            </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.ver-mas-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var cardText = btn.closest('.card-text');
+            cardText.querySelector('.short-desc').classList.add('d-none');
+            cardText.querySelector('.full-desc').classList.remove('d-none');
+            btn.classList.add('d-none');
+        });
+    });
+});
+</script>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-info">No hay patrones disponibles por el momento.</div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

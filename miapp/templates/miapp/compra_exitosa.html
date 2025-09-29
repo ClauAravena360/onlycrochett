@@ -1,0 +1,9 @@
+{% extends "miapp/base.html" %}
+{% block content %}
+<div class="container mt-5 text-center">
+  <h2 class="mb-4">¡Compra realizada con éxito!</h2>
+  <p>Tu compra <b>#{{ compra.id }}</b> ha sido registrada y está en estado <b>{{ compra.get_estado_display }}</b>.</p>
+  <a href="{% url 'index' %}" class="btn btn-primary mt-3">Volver al inicio</a>
+  <a href="{% url 'ver_carrito' %}" class="btn btn-outline-secondary mt-3">Ver carrito</a>
+</div>
+{% endblock %}

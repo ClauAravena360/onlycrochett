@@ -1,0 +1,78 @@
+{% extends "miapp/base.html" %}
+{% load static %}
+{% block content %}
+<!-- El nav y footer ya están en base.html -->
+<div class="container my-5">
+    <h1 class="mb-4 text-center">Hilado Roma</h1>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for hilado in hilados_roma %}
+        <div class="col">
+            <div class="card h-100">
+                <img src="{{ hilado.imagen.url }}" class="card-img-top" alt="{{ hilado.nombre }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ hilado.nombre }}</h5>
+                    <p class="card-text">
+                        {% if hilado.descripcion|length > 80 %}
+                            <span class="short-desc">{{ hilado.descripcion|slice:":80" }}...</span>
+                            <span class="full-desc d-none">{{ hilado.descripcion }}</span>
+                            <button type="button" class="btn btn-link p-0 ver-mas-btn">Ver más</button>
+                        {% else %}
+                            {{ hilado.descripcion }}
+                        {% endif %}
+                    </p>
+                    <p class="fw-bold mb-2">Precio: ${{ hilado.precio|floatformat:0 }}</p>
+                    <form method="post" action="{% url 'agregar_al_carrito' hilado.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary w-100 mt-2" {% if hilado.stock == 0 %}disabled{% endif %}>Agregar al carrito</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center">No hay productos Roma cargados.</div>
+        {% endfor %}
+    </div>
+    <br><br>
+    <h1 class="mb-4 text-center">Chenille</h1>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for hilado in hilados_chenille %}
+        <div class="col">
+            <div class="card h-100">
+                <img src="{{ hilado.imagen.url }}" class="card-img-top" alt="{{ hilado.nombre }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ hilado.nombre }}</h5>
+                    <p class="card-text">
+                        {% if hilado.descripcion|length > 80 %}
+                            <span class="short-desc">{{ hilado.descripcion|slice:":80" }}...</span>
+                            <span class="full-desc d-none">{{ hilado.descripcion }}</span>
+                            <button type="button" class="btn btn-link p-0 ver-mas-btn">Ver más</button>
+                        {% else %}
+                            {{ hilado.descripcion }}
+                        {% endif %}
+                    </p>
+                    <p class="fw-bold mb-2">Precio: ${{ hilado.precio|floatformat:0 }}</p>
+                    <form method="post" action="{% url 'agregar_al_carrito' hilado.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary w-100 mt-2" {% if hilado.stock == 0 %}disabled{% endif %}>Agregar al carrito</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center">No hay productos Chenille cargados.</div>
+        {% endfor %}
+    </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.ver-mas-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var cardText = btn.closest('.card-text');
+            cardText.querySelector('.short-desc').classList.add('d-none');
+            cardText.querySelector('.full-desc').classList.remove('d-none');
+            btn.classList.add('d-none');
+        });
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "miapp/base.html" %}
+{% load static %}
+{% block content %}
+<div class="container mt-5">
+  <h1 class="mb-4 text-center">Contacto</h1>
+  {% if exito %}
+    <div class="alert alert-success text-center">¡Mensaje enviado correctamente!</div>
+  {% endif %}
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Enviar</button>
+  </form>
+  <hr>
+  <div class="text-center mt-4">
+    <h5>¡Seguime en redes!</h5>
+    <a href="https://www.instagram.com/only_crochett?igsh=MWM2MHdxNTE4dHZtZg==" target="_blank" class="me-3">
+      <img src="{% static 'miapp/css/style/images/logo ig.png' %}" alt="Instagram" style="width:32px;height:32px;">
+    </a>
+    <a href="https://www.tiktok.com/@only_crochett?_t=ZM-8xleQSIxaky&_r=1" target="_blank">
+      <img src="{% static 'miapp/css/style/images/logo tiktok.png' %}" alt="TikTok" style="width:32px;height:32px;">
+    </a>
+  </div>
+</div>
+{% endblock %}

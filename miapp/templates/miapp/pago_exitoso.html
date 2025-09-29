@@ -1,0 +1,10 @@
+{% extends 'miapp/base.html' %}
+{% block content %}
+<div class="container py-5 text-center">
+    <div class="alert alert-success">
+        <h2>¡Pago realizado con éxito!</h2>
+        <p>Tu compra fue procesada correctamente. Ya puedes descargar tus patrones desde la sección <a href="{% url 'mis_descargables' %}">Mis descargables</a>.</p>
+    </div>
+    <a href="{% url 'index' %}" class="btn btn-primary">Volver al inicio</a>
+</div>
+{% endblock %}

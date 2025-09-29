@@ -1,0 +1,152 @@
+/* Efecto hover para accesorios */
+.accesorio-img-container {
+  position: relative;
+  width: 100%;
+  height: 180px;
+}
+.accesorio-img-base {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%; object-fit: contain;
+  transition: opacity 0.3s;
+  z-index: 1;
+}
+.accesorio-img-hover {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%; object-fit: contain;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 2;
+}
+.accesorio-hover-card:hover .accesorio-img-hover {
+  opacity: 1;
+}
+.accesorio-hover-card:hover .accesorio-img-base {
+  opacity: 0;
+}
+@font-face {
+  font-family: 'bobamilk';
+  src: url('/static/miapp/css/style/fuentes/bobamilk/BobamilkRegular.ttf') format('truetype');
+}
+
+/* Fuente bobamilk para todos los h1 */
+h1, h1.titulo-bobamilk {
+  font-family: 'bobamilk', cursive !important;
+  color: #222 !important;
+}
+/* Imágenes de las cards de categorías */
+.card-body img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 12px;
+  background: #fff;
+  border: 2px solid #fbd5e5;
+}
+*{
+      font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; /* Fuente general del cuerpo */
+      box-sizing: border-box; /* Asegura que el padding y el borde se incluyan en el ancho y alto total */
+      margin: 0; /* Elimina el margen por defecto de todos los elementos */
+     padding: 0; /* Elimina el padding por defecto del body */
+} 
+body{
+    background-color: #fbd5e5 !important;/*color de fondo suave */
+}
+.carousel-item img {
+    width: 787px;       /* Asegura que la imagen ocupe todo el ancho de su contenedor */
+    height: 394px;     /* **ESTA ES LA CLAVE para la altura uniforme. Ajusta este valor.** */
+     /* Recorta la imagen para que cubra el espacio sin distorsión */
+}
+
+/* Media queries para que sea responsivo en diferentes tamaños de pantalla */
+@media (max-width: 768px) {
+    .carousel-item img {
+        height: 350px; /* Altura para tablets */
+    }
+}
+
+@media (max-width: 576px) {
+    .carousel-item img {
+        height: 250px; /* Altura para móviles */
+    }
+}
+.carousel {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.3s;
+}
+
+@media (max-width: 600px) {
+  .carousel {
+    max-width: 100%;
+    padding: 0 10px;
+  }
+  .carousel img {
+    border-radius: 8px;
+  }
+}
+
+.logo{
+    width: 75px; /* Ajusta el tamaño del logo */
+    height: auto; /* Mantiene la proporción del logo */
+    display: block;
+    margin: 0; /* Elimina el margen automático */
+    padding: 0; /* Elimina el padding */
+    margin-right: 12px; /* Espacio a la derecha del logo */
+    float: left; /* Opcional: fuerza el logo a la izquierda */
+}
+
+@font-face {
+  font-family: 'bobamilk';
+  src: url('/static/miapp/css/style/fuentes/bobamilk/BobamilkRegular.ttf') format('truetype');
+}
+#marca {
+  font-family: 'bobamilk', cursive;
+  font-size: 1.5rem;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.navbar-links, .navbar-link {
+  font-family: 'bobamilk', cursive !important;
+}
+
+#buscar {
+  border-color: hotpink; /* Cambia el color del borde del input de búsqueda */
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; /* Fuente del input de búsqueda */
+  
+
+}
+#pieDePagina {
+  background-color: #f7e2eb; /* Color de fondo del pie de página */
+  padding: 20px; /* Espacio interno */
+  text-align: center; /* Centra el texto */
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; /* Fuente del pie de página */
+}
+h2 {
+  font-family: 'bobamilk', cursive; /* Fuente personalizada para los títulos */
+  color: #ffffff; /* Color del texto */
+  text-align: center; /* Centra el texto */
+  margin-top: 20px; /* Espacio superior */
+}
+#botonnav {
+  background-color: #f7e2eb; /* Color de fondo del botón */
+  color: hotpink; /* Color del texto del botón */
+  border: hotpink; /* Elimina el borde por defecto */
+  padding: 10px 20px; /* Espacio interno del botón */
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; /* Fuente del botón */
+  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+}

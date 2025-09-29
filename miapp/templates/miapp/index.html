@@ -1,0 +1,83 @@
+{% extends "miapp/base.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+  <!-- El nav ya está en base.html, se elimina aquí para evitar duplicidad y errores de rutas -->
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img class="carrusel d-block w-100" src="{% static 'miapp/css/style/images/foto completa.jpg' %}" alt="foto principal">
+          </div>
+          <div class="carousel-item">
+            <img class="carrusel d-block w-100" src="{% static 'miapp/css/style/images/amigurumis.jpg' %}" alt="amigurumis">
+          </div>
+          <div class="carousel-item">
+            <img class="carrusel d-block w-100" src="{% static 'miapp/css/style/images/Hilados.jpg' %}" alt="hilados y accesorios">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Siguiente</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Agrega margen superior aquí -->
+<div class="container text-center mt-5">
+  <div id="hilados" class="row g-7">
+    <div class="col">
+      <div class="card h-100 border-0 shadow-sm">
+        <div class="card-body">
+          <img src="{% static 'miapp/css/style/categorias/hilados.jpg' %}" alt="Hilados" style="width: 100px; height: 100px;">
+          <h1 class="mt-3">Hilados</h1>
+          <p class="lead">Roma y Chenille</p>
+          <a class="btn btn-primary" href="/hiladoRoma/" role="button">Ver más</a>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100 border-0 shadow-sm">
+        <div class="card-body">
+          <img src="{% static 'miapp/css/style/categorias/amigurumis terminados.png' %}" alt="Amigurumis" style="width: 100px; height: 100px;">
+          <h1 class="mt-3">Amigurumis Terminados</h1>
+          <p class="lead">Amigurumis terminados a la venta</p>
+          <a class="btn btn-primary" href="/productos/" role="button">Ver más</a>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100 border-0 shadow-sm">
+        <div class="card-body">
+          <img src="{% static 'miapp/css/style/categorias/kits.jpg' %}" alt="Patrones" style="width: 100px; height: 100px;">
+          <h1 class="mt-3">Patrones</h1>
+          <p class="lead">Patrones de amigurumis y Kits </p>
+          <a class="btn btn-primary" href="/patrones/" role="button">Ver más</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Video de YouTube vertical -->
+<div class="container my-5 text-center">
+  <h2 class="mb-4">¡Mirá nuestro video!</h2>
+  <div class="ratio ratio-9x16 mx-auto w-100" style="max-width: 360px; min-height: 400px;">
+    <iframe 
+      src="https://www.youtube.com/embed/yTQH3g9jwWA" 
+      title="Video de Only Crochett" 
+      allowfullscreen
+      style="border:0; width:100%; height:100%; min-height:400px;">
+    </iframe>
+  </div>
+</div>
+{% endblock %}

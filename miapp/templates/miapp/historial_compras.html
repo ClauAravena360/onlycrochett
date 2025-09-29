@@ -1,0 +1,42 @@
+{% extends "miapp/base.html" %}
+{% block content %}
+<div class="container my-5">
+  <h2 class="mb-4 text-center">Mis compras</h2>
+  {% if compras %}
+  <div class="table-responsive">
+    <table class="table table-bordered bg-white">
+      <thead class="table-light">
+        <tr>
+          <th>ID</th>
+          <th>Fecha</th>
+          <th>Estado</th>
+          <th>Productos</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for compra in compras %}
+        <tr>
+          <td>#{{ compra.id }}</td>
+          <td>{{ compra.fecha|date:"d/m/Y H:i" }}</td>
+          <td>{{ compra.get_estado_display }}</td>
+          <td>
+            <ul class="mb-0">
+              {% for det in compra.detalles.all %}
+                <li>
+                  {{ det.producto.nombre }}
+                  {% if det.numero_crochet %} (N° crochet: {{ det.numero_crochet.numero }}){% endif %}
+                  x{{ det.cantidad }}
+                </li>
+              {% endfor %}
+            </ul>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+    <div class="alert alert-info text-center">No tienes compras registradas.</div>
+  {% endif %}
+</div>
+{% endblock %}

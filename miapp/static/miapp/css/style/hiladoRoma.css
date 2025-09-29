@@ -1,0 +1,41 @@
+*{
+      font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; /* Fuente general del cuerpo */
+      box-sizing: border-box; /* Asegura que el padding y el borde se incluyan en el ancho y alto total */
+      margin: 0; /* Elimina el margen por defecto de todos los elementos */
+     padding: 0; /* Elimina el padding por defecto del body */
+} 
+body{
+    background-color: #fbd5e5 !important;/*color de fondo suave */
+}
+
+.card {
+  max-width: 220px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+ @font-face {
+  font-family: 'bobamilk'; /* Nombre de la fuente personalizada */
+  src: url('../fuentes/bobamilk/BobamilkRegular.ttf') format('truetype'); /* Ruta a la fuente personalizada */
+ }
+
+h1 {
+  font-family: 'bobamilk', cursive;
+}
+.logo{
+    width: 75px; /* Ajusta el tamaño del logo */
+    height: auto; /* Mantiene la proporción del logo */
+    display: block;
+    margin: 0; /* Elimina el margen automático */
+    padding: 0; /* Elimina el padding */
+    margin-right: 12px; /* Espacio a la derecha del logo */
+    float: left; /* Opcional: fuerza el logo a la izquierda */
+}
+#botonnav {
+  background-color: #f7e2eb; /* Color de fondo del botón */
+  color: hotpink; /* Color del texto del botón */
+  border: hotpink; /* Elimina el borde por defecto */
+  padding: 10px 20px; /* Espacio interno del botón */
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; /* Fuente del botón */
+  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+}

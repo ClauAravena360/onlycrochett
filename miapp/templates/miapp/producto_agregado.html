@@ -1,0 +1,13 @@
+{% extends 'miapp/base.html' %}
+{% block content %}
+<div class="container my-5">
+    <div class="alert alert-success text-center">
+        <h4 class="mb-3">¡Producto agregado al carrito!</h4>
+        <p><strong>{{ producto.nombre }}</strong> fue agregado exitosamente.</p>
+        <div class="d-flex justify-content-center gap-3 mt-4">
+            <a href="javascript:history.back()" class="btn btn-outline-primary">Continuar comprando</a>
+            <a href="{% url 'ver_carrito' %}" class="btn btn-success">Ir a pagar</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

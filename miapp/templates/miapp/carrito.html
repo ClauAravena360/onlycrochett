@@ -1,0 +1,83 @@
+{% extends "miapp/base.html" %}
+{% block content %}
+<div class="container my-5">
+    <h1 class="mb-4 text-center">Carrito de compras</h1>
+    {% if productos %}
+    <table class="table table-bordered bg-white">
+        <thead class="table-light">
+            <tr>
+                <th>Producto</th>
+                <th>Imagen</th>
+                <th>Cantidad</th>
+                <th>N° Crochet</th>
+                <th>Precio unitario</th>
+                <th>Subtotal</th>
+                <th>Stock restante</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in productos %}
+                        <tr>
+                                <td>{{ item.producto.nombre }}</td>
+                                <td>
+                                    {% if item.es_patron and item.producto.imagen %}
+                                        <img src="{{ item.producto.imagen.url }}" alt="{{ item.producto.nombre }}" style="width:60px;height:60px;object-fit:contain;">
+                                    {% elif item.producto.imagen %}
+                                        <img src="{{ item.producto.imagen.url }}" alt="{{ item.producto.nombre }}" style="width:60px;height:60px;object-fit:contain;">
+                                    {% else %}-{% endif %}
+                                </td>
+                                <td>{{ item.cantidad }}</td>
+                                <td>{% if item.numero_crochet %}{{ item.numero_crochet.numero }}{% elif item.es_patron %}PDF{% else %}-{% endif %}</td>
+                                <td>${{ item.precio_unitario|floatformat:0 }}</td>
+                                <td>${{ item.subtotal|floatformat:0 }}</td>
+                                <td>
+                                        {% if item.stock_crochet %}
+                                                {{ item.stock_crochet.stock }}
+                                        {% elif item.producto.stock is not None and not item.es_patron %}
+                                                {{ item.producto.stock }}
+                                        {% else %}-{% endif %}
+                                </td>
+                                <td>
+                                        <form method="post" action="{% url 'eliminar_del_carrito' item.producto.id %}">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                                        </form>
+                                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="text-end fw-bold fs-5 mt-3">
+        Total: ${{ total|floatformat:0 }}
+    </div>
+    {% else %}
+    <div class="alert alert-info text-center">El carrito está vacío.</div>
+    {% endif %}
+    <div class="text-center mt-4">
+        <a href="{% url 'accesorios' %}" class="btn btn-secondary">Seguir comprando</a>
+        {% if productos and user.is_authenticated %}
+        <form method="post" action="{% url 'finalizar_compra' %}" class="d-inline">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-success ms-2">Finalizar compra (solo simulado)</button>
+        </form>
+        <button id="btn-mercadopago" class="btn btn-primary ms-2">Pagar con Mercado Pago</button>
+        <script>
+        document.getElementById('btn-mercadopago').onclick = function() {
+            fetch('{% url 'pago_mercadopago' %}')
+                .then(resp => resp.json())
+                .then(data => {
+                    if(data.init_point) {
+                        window.location.href = data.init_point;
+                    } else {
+                        alert('No se pudo iniciar el pago.');
+                    }
+                });
+        };
+        </script>
+        {% elif productos %}
+        <div class="alert alert-warning d-inline-block ms-2">Inicia sesión para finalizar la compra.</div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
